@@ -27,6 +27,12 @@ def hack_everything(clip_skip=0):
     print('Enabled clip hacks.')
     return
 
+def hack_everyone(clip_skip=0):
+    disable_verbosity()
+    ldm.modules.encoders.modules.FrozenCLIPEmbedder.forward = _hacked_clip_forward
+    ldm.modules.encoders.modules.FrozenCLIPEmbedder.clip_skip = clip_skip
+    print('Enabled clip hacks.')
+    return
 
 # Written by Lvmin
 def _hacked_clip_forward(self, text):
